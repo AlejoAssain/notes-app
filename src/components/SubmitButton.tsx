@@ -20,7 +20,12 @@ const SubmitButton = (props: SubmitButtonProps) => {
   return (
     <Button
       type="submit"
-
+      whileHover={{
+        scale: 1.05
+      }}
+      whileTap={{
+        scale: 0.95
+      }}
     >
       { props.label }
     </Button>
