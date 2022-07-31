@@ -1,14 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
 import { Formik, Form, FormikHelpers } from 'formik';
-import FormInput from './FormInput';
-import SubmitButton from './SubmitButton';
+import FormInput from '../FormInput';
+import SubmitButton from '../SubmitButton';
 import TogglePwButton from './TogglePwButton';
-import { userRegisterSchema, getUser } from "../../api_call/apiCall";
 const Yup = require("yup")
 
 
-interface registerFromProps {
+interface registerFormProps {
 
 }
 
@@ -51,26 +50,26 @@ const formInitialValues: FormValues = {
   passwordConfirmation: ""
 };
 
-const RegisterForm: React.FC = (props: registerFromProps) => {
+const RegisterForm: React.FC = (props: registerFormProps) => {
   const [viewPassword, setViewPassword] = useState(false);
 
   const toggleViewPassword = () => {
     setViewPassword(!viewPassword);
   };
 
-  const registerUser = async (values: userRegisterSchema, actions: FormikHelpers<FormValues>) => {
+  const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
     console.log("Form data", values);
 
     // post request to server - code here
 
-    setViewPassword(false)
+    setViewPassword(false);
     actions.resetForm();
-  }
+  };
 
   return (
     <Formik
       initialValues={formInitialValues}
-      onSubmit={registerUser}
+      onSubmit={handleSubmit}
       validationSchema={registerFormValidationSchema}
     >
       <Form>
@@ -80,7 +79,7 @@ const RegisterForm: React.FC = (props: registerFromProps) => {
         <FormInput label="Enter a new password:" name="password" type={ viewPassword ? "text" : "password" } />
         <FormInput label="Confirm your password:" name="passwordConfirmation" type={ viewPassword ? "text" : "password" } />
         <TogglePwButton viewPassword={ viewPassword } onClick={ toggleViewPassword } />
-        <SubmitButton />
+        <SubmitButton label="Register" />
       </Form>
     </Formik>
   );

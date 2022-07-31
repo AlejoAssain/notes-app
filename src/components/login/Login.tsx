@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react';
-import { getUser } from '../../api_call/apiCall';
+import styled from 'styled-components';
+import LoginForm from "./LoginForm"
 
 
-const JWT_TOKEN: string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZGM0YTk1MTBiMjEwMzE1ZTlkNGIxMSIsImlhdCI6MTY1ODc3MDIxNCwiZXhwIjoxNjYxMzYyMjE0fQ.6k14wrcwvQG45CDnEmQIlAiqZ4bEDUAb5nUvs18WKgE"
+const LoginContainer = styled.div`
+  margin: auto;
+`;
 
 const Login: React.FC = () => {
-  useEffect(() => {
-    getUser(JWT_TOKEN)
-      .then((response) => console.log("Response", response))
-      .catch((error) => console.log(error));
-  }, []);
-
   return (
-    <div>
-      <h1>Login page</h1>
-    </div>
+    <LoginContainer>
+      Login page
+      <LoginForm />
+    </LoginContainer>
   );
 };
 
